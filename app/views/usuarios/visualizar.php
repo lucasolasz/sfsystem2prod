@@ -39,7 +39,7 @@
     </div>
 </div>
 <script>
-    var urlSistema = <?= URL ?>;
+    var urlSistema = '<?= URL ?>';
     var params = {
         url: urlSistema,
         tabela: 'tb_usuario', //tabela que será utilizada para pesquisa
