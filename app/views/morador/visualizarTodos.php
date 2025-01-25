@@ -41,7 +41,9 @@
     </div>
 </div>
 <script>
+    var urlSistema = <?= URL ?>;
     var params = {
+        url: urlSistema,
         tabela: 'tb_morador', //tabela que será utilizada para pesquisa
         colunas_pesquisa: ['nm_morador'], //coluna para a busca dentro da tabela. Input Search
         colunas_ordenacao: ['nm_morador'], //colunas utilizadas para ordenação
@@ -74,10 +76,10 @@
                 "render": function(data, type, row) {
                     // Retorna o HTML para os botões de ação, com href dinâmico
                     return `
-                    <a href="/Moradores/editarMorador/${row.id_morador}" class="btn btn-warning">
+                    <a href="${urlSistema}Moradores/editarMorador/${row.id_morador}" class="btn btn-warning">
                         <i class="bi bi-pencil-square"></i> Editar
                     </a>
-                    <a href="/Moradores/deletarMorador/${row.id_morador}" class="btn btn-danger">
+                    <a href="${urlSistema}Moradores/deletarMorador/${row.id_morador}" class="btn btn-danger">
                         <i class="bi bi-trash-fill"></i> Excluir
                     </a>`;
                 }

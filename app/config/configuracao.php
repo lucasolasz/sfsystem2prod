@@ -1,10 +1,17 @@
 <?php
 
 //Parametros para o Banco
-define('DB_HOST', 'db');
-define('DB_USER', 'root');
-define('DB_PASS', '123');
-define('DB_NAME', 'projeto_base');
+// define('DB_HOST', 'db');
+// define('DB_USER', 'root');
+// define('DB_PASS', '123');
+// define('DB_NAME', 'projeto_base');
+
+//Parametros hospedagem
+define('DB_HOST', 'localhost');
+define('DB_USER', 'sf1sys33_sfSystemUserMySql');
+define('DB_PASS', '5ZJja^3u8FW%k');
+define('DB_NAME', 'sf1sys33_sfsystem2');
+
 define('DB_PORT', '3306');
 define('DB_CHARSET', 'utf8');
 define('OPERACAO_SALVAR', 'OPERACAO_SALVAR');

@@ -3,7 +3,7 @@ function initDataTable(tableId, params) {
         $('#' + tableId).DataTable({
             "lengthMenu": [10, 15, 25],
             "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json"
+                "url": "https://cdn.datatables.net/plug-ins/1.13.5/i18n/pt-BR.json"
             },
             "processing": true,
             "serverSide": true,

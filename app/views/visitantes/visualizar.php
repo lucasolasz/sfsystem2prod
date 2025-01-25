@@ -41,7 +41,9 @@
 </div>
 
 <script>
+    var urlSistema = <?= URL ?>;
     var params = {
+        url: urlSistema,
         tabela: 'tb_visitante',
         colunas_pesquisa: ['nm_visitante', 'documento_visitante'],
         colunas_ordenacao: ['nm_visitante'],
@@ -65,10 +67,10 @@
             "render": function (data, type, row) {
                 // Retorna o HTML para os botões de ação, com href dinâmico
                 return `
-                    <a href="/Visitantes/editarVisitante/${row.id_visitante}" class="btn btn-warning">
+                    <a href="${urlSistema}Visitantes/editarVisitante/${row.id_visitante}" class="btn btn-warning">
                         <i class="bi bi-pencil-square"></i> Editar
                     </a>
-                    <a href="/Visitas/carregarTelaCadastroVisita/${row.id_visitante}" class="btn btn-success">
+                    <a href="${urlSistema}Visitas/carregarTelaCadastroVisita/${row.id_visitante}" class="btn btn-success">
                         <i class="bi bi-arrow-up-circle-fill"></i> Entrada Visita
                     </a>`;
             }
