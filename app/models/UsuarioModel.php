@@ -53,7 +53,7 @@ class UsuarioModel
     public function armazenarUsuario($dados)
     {
 
-        $this->db->query("INSERT INTO tb_usuario (ds_nome_usuario, ds_sobrenome_usuario, ds_email_usuario, ds_senha, fk_cargo, fk_tipo_usuario) VALUES (:ds_nome_usuario, :ds_sobrenome_usuario, :ds_email_usuario, :ds_senha, :fk_cargo, :fk_tipo_usuario)");
+        $this->db->query("INSERT INTO tb_usuario (ds_nome_usuario, ds_sobrenome_usuario, ds_email_usuario, ds_senha, fk_cargo, fk_tipo_usuario, fk_casa) VALUES (:ds_nome_usuario, :ds_sobrenome_usuario, :ds_email_usuario, :ds_senha, :fk_cargo, :fk_tipo_usuario, :fk_casa)");
 
         $this->db->bind("ds_nome_usuario", $dados['txtNome']);
         $this->db->bind("ds_sobrenome_usuario", $dados['txtSobreNome']);
@@ -61,6 +61,7 @@ class UsuarioModel
         $this->db->bind("ds_senha", $dados['txtSenha']);
         $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
         $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
+        $this->db->bind("fk_casa", $dados['cboCasa']);
 
 
         if ($this->db->executa()) {
@@ -107,7 +108,8 @@ class UsuarioModel
         ds_sobrenome_usuario=:ds_sobrenome_usuario,
         ds_email_usuario=:ds_email_usuario, 
         fk_cargo=:fk_cargo,
-        fk_tipo_usuario=:fk_tipo_usuario
+        fk_tipo_usuario=:fk_tipo_usuario,
+        fk_casa=:fk_casa
         
         WHERE id_usuario= :id_usuario;
         ");
@@ -118,6 +120,7 @@ class UsuarioModel
         $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
         $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
         $this->db->bind("id_usuario", $dados['idUsuario']);
+        $this->db->bind("fk_casa", $dados['cboCasa']);
 
         if ($this->db->executa()) {
             return true;
@@ -133,7 +136,8 @@ class UsuarioModel
         ds_sobrenome_usuario=:ds_sobrenome_usuario,
         ds_email_usuario=:ds_email_usuario, 
         fk_cargo=:fk_cargo,
-        fk_tipo_usuario=:fk_tipo_usuario
+        fk_tipo_usuario=:fk_tipo_usuario,
+        fk_casa=:fk_casa
         
         WHERE id_usuario= :id_usuario;
         ");
@@ -144,6 +148,7 @@ class UsuarioModel
         $this->db->bind("fk_cargo", $dados['cboCargoUsuario']);
         $this->db->bind("fk_tipo_usuario", $dados['cboTipoUsuario']);
         $this->db->bind("id_usuario", $dados['idUsuario']);
+        $this->db->bind("fk_casa", $dados['cboCasa']);
 
         if ($this->db->executa()) {
             return true;

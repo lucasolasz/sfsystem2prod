@@ -41,20 +41,62 @@
                     <select class="form-select <?= $dados['tipoCargo_erro'] ? 'is-invalid' : '' ?>"
                         name="cboCargoUsuario" id="cboCargoUsuario">
                         <option value="NULL"></option>
-                        <?php foreach ($dados['cargoUsuario'] as $cargoUsuario) {
-                            //Resgata valor do select 
-                            $cargoSelected = '';
-                            if ($cargoUsuario->id_cargo == $dados['usuario']->fk_cargo) {
-                                $cargoSelected = 'selected';
-                            }
-                            ?>
-                            <option <?= $cargoSelected ?> value="<?= $cargoUsuario->id_cargo ?>">
-                                <?= $cargoUsuario->ds_cargo ?></option>
-                            <?php
-                        } ?>
+
+                        <?php 
+                        
+                        if(isset($dados['cboCargoUsuario'])){
+
+                            foreach ($dados['cargoUsuario'] as $cargoUsuario) {
+                                //Resgata valor do select 
+                                $cargoSelected = '';
+                                if ($cargoUsuario->id_cargo == $dados['cboCargoUsuario']) {
+                                    $cargoSelected = 'selected';
+                                }
+                                ?>
+                                <option <?= $cargoSelected ?> value="<?= $cargoUsuario->id_cargo ?>">
+                                    <?= $cargoUsuario->ds_cargo ?>
+                                </option>
+                                <?php
+                            } 
+
+                        } else {
+                            foreach ($dados['cargoUsuario'] as $cargoUsuario) {
+                                //Resgata valor do select 
+                                $cargoSelected = '';
+                                if ($cargoUsuario->id_cargo == $dados['usuario']->fk_cargo) {
+                                    $cargoSelected = 'selected';
+                                }
+                                ?>
+                                <option <?= $cargoSelected ?> value="<?= $cargoUsuario->id_cargo ?>">
+                                    <?= $cargoUsuario->ds_cargo ?>
+                                </option>
+                                <?php
+                            } 
+                        }
+                        ?>
+                        
+                        
                     </select>
                     <div class="invalid-feedback"><?= $dados['tipoCargo_erro'] ?></div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="cboCasa" class="form-label">N° Casa: *</label>
+                    <select class="form-select <?= $dados['cboCasa_erro'] ? 'is-invalid' : '' ?>" name="cboCasa" id="cboCasa">
+                        <option label="Selecione uma casa"></option>
+                        <?php foreach ($dados['casas'] as $casa) {
+                            //Resgata valor do select 
+                            $casaSelected = '';
+                            if ($casa->id_casa == $dados['usuario']->fk_casa) {
+                                $casaSelected = 'selected';
+                            }
+                        ?>
+                            <option <?= $casaSelected ?> value="<?= $casa->id_casa ?>"><?= $casa->ds_numero_casa ?></option>
+                        <?php } ?>
+                    </select>
+                    <div class="invalid-feedback"><?= $dados['cboCasa_erro'] ?></div>
+                </div>    
+
                 <div class="mb-3">
                     <label for="txtSenha" class="form-label">Senha: *</label>
                     <input type="password" class="form-control <?= $dados['senha_erro'] ? 'is-invalid' : '' ?>"
@@ -80,3 +122,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Função para mostrar ou esconder o select de casas
+        function toggleCasaSelect() {
+            if ($('#cboCargoUsuario').val() == '3') {
+                $('#cboCasa').parent().show();  // Mostra o campo de casa
+            } else {
+                $('#cboCasa').parent().hide();  // Esconde o campo de casa
+            }
+        }
+
+        // Executa a verificação ao carregar a página
+        toggleCasaSelect();
+
+        // Adiciona o evento change no select "cboCargoUsuario"
+        $('#cboCargoUsuario').change(function() {
+            toggleCasaSelect();
+        });
+    });
+</script>

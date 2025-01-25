@@ -26,6 +26,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Nome usuário</th>
+                            <th scope="col">Sobrenome</th>
                             <th scope="col">Cargo</th>
                             <th scope="col">Ações</th>
                         </tr>
@@ -58,6 +59,9 @@
                     }
                     return data;
                 }
+            },
+            {
+                "data": "ds_sobrenome_usuario"
             },
             {
                 "data": "ds_cargo"

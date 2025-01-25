@@ -8,7 +8,7 @@ function initDataTable(tableId, params) {
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "/ListarDataTable/listarRegistrosDataTable",
+                "url": params.url + "ListarDataTable/listarRegistrosDataTable",
                 "type": "POST",
                 "data": function (d) {
                     // Monta o objeto a ser enviado

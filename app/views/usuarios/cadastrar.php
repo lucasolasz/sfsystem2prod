@@ -2,6 +2,7 @@
     <div class="card">
         <div class="card-body">
             <h2>Cadastro de Usuário</h2>
+            <?php echo $dados['cboCasa_erro'] ?>   
             <p class="mb-3 text-muted">Preencha o formulário abaixo para cadastrar um novo usuário</p>
 
             <form name="cadastrar" method="POST" action="<?= URL . 'Usuarios/cadastrar' ?>">
@@ -46,6 +47,25 @@
                     </select>
                     <div class="invalid-feedback"><?= $dados['tipoCargo_erro'] ?></div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="cboCasa" class="form-label">N° Casa: *</label>
+                    <select class="form-select <?= $dados['cboCasa_erro'] ? 'is-invalid' : '' ?>" name="cboCasa" id="cboCasa">
+                        <option label="Selecione uma casa"></option>
+                        <?php foreach ($dados['casas'] as $casa) {
+                            //Resgata valor do select 
+                            $casaSelected = '';
+                            if ($casa->id_casa == $dados['fk_casa']) {
+                                $casaSelected = 'selected';
+                            }
+                        ?>
+                            <option <?= $casaSelected ?> value="<?= $casa->id_casa ?>"><?= $casa->ds_numero_casa ?></option>
+                        <?php } ?>
+                    </select>
+                    <div class="invalid-feedback"><?= $dados['cboCasa_erro'] ?></div>
+                </div>    
+                 
+
                 <div class="mb-3">
                     <label for="txtSenha" class="form-label">Senha: *</label>
                     <input type="password" class="form-control <?= $dados['senha_erro'] ? 'is-invalid' : '' ?>"
@@ -71,3 +91,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Função para mostrar ou esconder o select de casas
+        function toggleCasaSelect() {
+            if ($('#cboCargoUsuario').val() == '3') {
+                $('#cboCasa').parent().show();  // Mostra o campo de casa
+            } else {
+                $('#cboCasa').parent().hide();  // Esconde o campo de casa
+            }
+        }
+
+        // Executa a verificação ao carregar a página
+        toggleCasaSelect();
+
+        // Adiciona o evento change no select "cboCargoUsuario"
+        $('#cboCargoUsuario').change(function() {
+            toggleCasaSelect();
+        });
+    });
+</script>
