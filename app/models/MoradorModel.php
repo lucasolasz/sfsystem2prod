@@ -38,7 +38,8 @@ class MoradorModel
             flag_tem_pet,
             qtd_pets,
             flag_adesivo,
-            qtd_adesivos
+            qtd_adesivos,
+            ds_detalhes
             )
             VALUES(:nm_morador,
              :fk_casa, 
@@ -58,7 +59,8 @@ class MoradorModel
              :flag_tem_pet,
              :qtd_pets,
              :flag_adesivo,
-             :qtd_adesivos
+             :qtd_adesivos,
+             :ds_detalhes
              );";
 
         $this->db->query($query);
@@ -83,6 +85,7 @@ class MoradorModel
         $this->db->bind("qtd_pets", $dados['qtdPets']);
         $this->db->bind("flag_adesivo", $dados['chkRecebeuAdesivo']);
         $this->db->bind("qtd_adesivos", $dados['qtdAdesivos']);
+        $this->db->bind("ds_detalhes", $dados['txtDetalhes']);
 
 
         if ($this->db->executa()) {
@@ -133,7 +136,8 @@ class MoradorModel
             flag_tem_pet = :flag_tem_pet,
             qtd_pets = :qtd_pets,
             flag_adesivo = :flag_adesivo,
-            qtd_adesivos = :qtd_adesivos
+            qtd_adesivos = :qtd_adesivos,
+            ds_detalhes = :ds_detalhes
         WHERE id_morador = :id_morador;";
 
         $this->db->query($query);
@@ -159,6 +163,8 @@ class MoradorModel
         $this->db->bind("flag_adesivo", $dados['chkRecebeuAdesivo']);
         $this->db->bind("qtd_adesivos", $dados['qtdAdesivos']);
         $this->db->bind("id_morador", $dados['idMorador']);
+        $this->db->bind("ds_detalhes", $dados['txtDetalhes']);
+
 
         if ($this->db->executa()) {
             return true;
@@ -216,7 +222,8 @@ class MoradorModel
             qtd_pets,
             flag_adesivo,
             qtd_adesivos,
-            fk_usuario
+            fk_usuario,
+            ds_detalhes
             )
             VALUES(:nm_morador,
              :fk_casa, 
@@ -237,7 +244,8 @@ class MoradorModel
              :qtd_pets,
              :flag_adesivo,
              :qtd_adesivos,
-             :fk_usuario
+             :fk_usuario,
+             :ds_detalhes
              );";
 
         $this->db->query($query);
@@ -264,6 +272,7 @@ class MoradorModel
         $this->db->bind("qtd_adesivos", $dados['qtdAdesivos']);
 
         $this->db->bind("fk_usuario", $dados['usuario']->id_usuario);
+        $this->db->bind("ds_detalhes", $dados['txtDetalhes']);
 
 
         if ($this->db->executa()) {

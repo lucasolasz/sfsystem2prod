@@ -177,6 +177,11 @@
                             <div class="invalid-feedback"><?= $dados['cboCasa_erro'] ?></div>
                         </div>
                     </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label" for="txtDetalhes">Outros Detalhes. Por exemplo: Dados de pessoas que moram na residência:</label>
+                        <textarea class="form-control" id="txtDetalhes" name="txtDetalhes" style="height: 100px" maxlength="2500"><?= trim($dados['morador']->ds_detalhes) ?></textarea>
+                    </div>
 
                     <hr>
 

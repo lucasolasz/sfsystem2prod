@@ -54,6 +54,7 @@ class Moradores extends Controller
                 'txtTelefoneDoisProprietario' => trim($formulario['txtTelefoneDoisProprietario']),
                 'txtTelefoneEmergenciaProprietario' => trim($formulario['txtTelefoneEmergenciaProprietario']),
                 'cboCasa' => $formulario['cboCasa'],
+                'txtDetalhes' => $formulario['txtDetalhes'],
 
                 'chkLocatario' => isset($formulario['chkLocatario']) ? trim($formulario['chkLocatario']) : "N",
                 'txtNomeLocatario' => trim($formulario['txtNomeLocatario']),
@@ -120,6 +121,7 @@ class Moradores extends Controller
                 'txtTelefoneUmProprietario' => '',
                 'txtTelefoneDoisProprietario' => '',
                 'txtTelefoneEmergenciaProprietario' => '',
+                'txtDetalhes' => '',
 
                 'chkLocatario' => '',
                 'txtNomeLocatario' => '',
@@ -133,6 +135,7 @@ class Moradores extends Controller
                 'chkPossuiPets' => '',
                 'qtdAdesivos' => '',
                 'chkRecebeuAdesivo' => '',
+                
 
 
 
@@ -220,6 +223,7 @@ class Moradores extends Controller
                 'txtTelefoneDoisProprietario' => trim($formulario['txtTelefoneDoisProprietario']),
                 'txtTelefoneEmergenciaProprietario' => trim($formulario['txtTelefoneEmergenciaProprietario']),
                 'cboCasa' => $formulario['cboCasa'],
+                'txtDetalhes' => $formulario['txtDetalhes'],
 
                 'chkLocatario' => isset($formulario['chkLocatario']) ? trim($formulario['chkLocatario']) : "N",
                 'txtNomeLocatario' => trim($formulario['txtNomeLocatario']),
@@ -291,6 +295,7 @@ class Moradores extends Controller
                 'txtTelefoneUmProprietario' => '',
                 'txtTelefoneDoisProprietario' => '',
                 'txtTelefoneEmergenciaProprietario' => '',
+                'txtDetalhes' => '',
 
                 'chkLocatario' => '',
                 'txtNomeLocatario' => '',
@@ -304,7 +309,6 @@ class Moradores extends Controller
                 'chkPossuiPets' => '',
                 'qtdAdesivos' => '',
                 'chkRecebeuAdesivo' => '',
-
 
 
                 'nomeProprietario_erro' => '',
@@ -407,6 +411,7 @@ class Moradores extends Controller
                 'txtTelefoneDoisProprietario' => trim($formulario['txtTelefoneDoisProprietario']),
                 'txtTelefoneEmergenciaProprietario' => trim($formulario['txtTelefoneEmergenciaProprietario']),
                 'cboCasa' => $usuario->fk_casa,
+                'txtDetalhes' => $formulario['txtDetalhes'],
 
                 'chkLocatario' => isset($formulario['chkLocatario']) ? trim($formulario['chkLocatario']) : "N",
                 'txtNomeLocatario' => trim($formulario['txtNomeLocatario']),
@@ -493,6 +498,7 @@ class Moradores extends Controller
                 'txtTelefoneUmProprietario' => '',
                 'txtTelefoneDoisProprietario' => '',
                 'txtTelefoneEmergenciaProprietario' => '',
+                'txtDetalhes' => '',
 
                 'chkLocatario' => '',
                 'txtNomeLocatario' => '',
@@ -565,6 +571,7 @@ class Moradores extends Controller
                 'txtTelefoneDoisProprietario' => trim($formulario['txtTelefoneDoisProprietario']),
                 'txtTelefoneEmergenciaProprietario' => trim($formulario['txtTelefoneEmergenciaProprietario']),
                 'cboCasa' => $morador->fk_casa,
+                'txtDetalhes' => $formulario['txtDetalhes'],
 
                 'chkLocatario' => isset($formulario['chkLocatario']) ? trim($formulario['chkLocatario']) : "N",
                 'txtNomeLocatario' => trim($formulario['txtNomeLocatario']),
@@ -662,6 +669,7 @@ class Moradores extends Controller
                 'txtTelefoneUmProprietario' => '',
                 'txtTelefoneDoisProprietario' => '',
                 'txtTelefoneEmergenciaProprietario' => '',
+                'txtDetalhes' => '',
 
                 'chkLocatario' => '',
                 'txtNomeLocatario' => '',
