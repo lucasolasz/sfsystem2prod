@@ -16,4 +16,11 @@ class CasaModel
         $this->db->query("SELECT * FROM tb_casa ORDER BY ds_numero_casa");
         return $this->db->resultados();
     }
+
+    public function reuperarTodasCasasNaoCadastradas()
+    {
+        $this->db->query("SELECT * FROM tb_casa tc
+                WHERE tc.id_casa NOT IN (SELECT DISTINCT(fk_casa) FROM tb_usuario WHERE fk_casa IS NOT NULL)");
+        return $this->db->resultados();
+    }
 }

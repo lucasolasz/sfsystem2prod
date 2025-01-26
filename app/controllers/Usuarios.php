@@ -21,7 +21,7 @@ class Usuarios extends Controller
 
         $tiposUsuario = $this->model->listarTipoUsuario();
         $cargoUsuario = $this->model->listarCargoUsuario();
-        $casas = $this->casaModel->reuperarTodasCasas();
+        $casas = $this->casaModel->reuperarTodasCasasNaoCadastradas();
 
         //Evita que codigos maliciosos sejam enviados pelos campos
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -166,7 +166,7 @@ class Usuarios extends Controller
         $tiposUsuario = $this->model->listarTipoUsuario();
         $cargoUsuario = $this->model->listarCargoUsuario();
         $usuario = $this->model->lerUsuarioPorId($id);
-        $casas = $this->casaModel->reuperarTodasCasas();
+        $casas = $this->casaModel->reuperarTodasCasasNaoCadastradas();
 
         //Evita que codigos maliciosos sejam enviados pelos campos
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);

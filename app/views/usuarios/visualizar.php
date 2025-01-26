@@ -27,6 +27,7 @@
                         <tr>
                             <th scope="col">Nome usuário</th>
                             <th scope="col">Sobrenome</th>
+                            <th scope="col">Casa</th>
                             <th scope="col">Cargo</th>
                             <th scope="col">Ações</th>
                         </tr>
@@ -46,10 +47,16 @@
         tabela: 'tb_usuario', //tabela que será utilizada para pesquisa
         colunas_pesquisa: ['ds_nome_usuario'], //coluna para a busca dentro da tabela. Input Search
         colunas_ordenacao: ['ds_nome_usuario'], //colunas utilizadas para ordenação
-        joins: [{
-            tabela: 'tb_cargo',
-            condicao: 'tb_usuario.fk_cargo = tb_cargo.id_cargo'
-        }], // Joins se necessário
+        joins: [
+            {
+                tabela: 'tb_cargo',
+                condicao: 'tb_usuario.fk_cargo = tb_cargo.id_cargo'
+            },
+            {
+            tabela: 'tb_casa',
+            condicao: 'tb_usuario.fk_casa = tb_casa.id_casa'
+            }
+        ], // Joins se necessário
         columns: [{
                 "data": "ds_nome_usuario",
                 "render": function(data, type, row) {
@@ -62,6 +69,9 @@
             },
             {
                 "data": "ds_sobrenome_usuario"
+            },
+            {
+                "data": "ds_numero_casa"
             },
             {
                 "data": "ds_cargo"
