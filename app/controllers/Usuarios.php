@@ -108,6 +108,7 @@ class Usuarios extends Controller
                 'txtSenha' => '',
                 'txtConfirmaSenha' => '',
                 'cboCargoUsuario' => '',
+                'cboCasa' => '',
 
                 'cboCasa_erro' => '',
                 'nome_erro' => '',

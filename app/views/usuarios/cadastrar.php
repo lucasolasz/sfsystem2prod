@@ -1,4 +1,17 @@
-<div class="col-xl-4 col-md-6 mx-auto p-5">
+<style>
+.toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+</style>
+
+
+<div class="col-xl-5 col-md-6 mx-auto p-5">
     <div class="card">
         <div class="card-body">
             <h2>Cadastro de Usuário</h2>
@@ -55,7 +68,7 @@
                         <?php foreach ($dados['casas'] as $casa) {
                             //Resgata valor do select 
                             $casaSelected = '';
-                            if ($casa->id_casa == $dados['fk_casa']) {
+                            if ($casa->id_casa == $dados['cboCasa']) {
                                 $casaSelected = 'selected';
                             }
                         ?>
@@ -65,19 +78,32 @@
                     <div class="invalid-feedback"><?= $dados['cboCasa_erro'] ?></div>
                 </div>    
                  
+                <div class="row mb-3">
+                    <div class="col-auto">
+                        <label for="txtSenha" class="form-label">Senha: *</label>
+                        <input type="password" class="form-control <?= $dados['senha_erro'] ? 'is-invalid' : '' ?>"
+                            name="txtSenha" id="txtSenha" value="<?= $dados['txtSenha'] ?>">
+                        <div class="invalid-feedback"><?= $dados['senha_erro'] ?></div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="txtSenha" class="form-label">Senha: *</label>
-                    <input type="password" class="form-control <?= $dados['senha_erro'] ? 'is-invalid' : '' ?>"
-                        name="txtSenha" id="txtSenha" value="<?= $dados['txtSenha'] ?>">
-                    <div class="invalid-feedback"><?= $dados['senha_erro'] ?></div>
+                    <div class="mt-auto col-auto">
+                        <input type="button" id="mostrarSenha" value="Exibir" class="btn btn-primary" />
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="txtConfirmaSenha" class="form-label">Confirmar Senha: *</label>
-                    <input type="password" class="form-control <?= $dados['confirma_senha_erro'] ? 'is-invalid' : '' ?>"
-                        name="txtConfirmaSenha" id="txtConfirmaSenha">
-                    <div class="invalid-feedback"><?= $dados['confirma_senha_erro'] ?></div>
+                            
+                <div class="row mb-3">
+                    <div class="col-auto">
+                        <label for="txtConfirmaSenha" class="form-label">Confirmar Senha: *</label>
+                        <input type="password" class="form-control <?= $dados['confirma_senha_erro'] ? 'is-invalid' : '' ?>"
+                            name="txtConfirmaSenha" id="txtConfirmaSenha">
+                        <div class="invalid-feedback"><?= $dados['confirma_senha_erro'] ?></div>
+                    </div>
+
+                    <div class="mt-auto col-auto">
+                        <input type="button" id="mostrarConfirmarSenha" value="Exibir" class="btn btn-primary" />
+                    </div>
                 </div>
+                
                 <div class="d-flex">
                     <div class="p-2">
                         <input type="submit" value="Cadastrar" class="btn btn-primary">
@@ -110,5 +136,34 @@
         $('#cboCargoUsuario').change(function() {
             toggleCasaSelect();
         });
+
+        $('#mostrarSenha').on('click', function(){
+
+            var passwordField = $('#txtSenha');
+            var passwordFieldType = passwordField.attr('type');
+            if(passwordFieldType == 'password')
+            {
+                passwordField.attr('type', 'text');
+                $(this).val('Esconder');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).val('Exibir');
+            }
+        });
+
+        $('#mostrarConfirmarSenha').on('click', function(){
+
+            var passwordField = $('#txtConfirmaSenha');
+            var passwordFieldType = passwordField.attr('type');
+            if(passwordFieldType == 'password')
+            {
+                passwordField.attr('type', 'text');
+                $(this).val('Esconder');
+            } else {
+                passwordField.attr('type', 'password');
+                $(this).val('Exibir');
+            }
+        });
+
     });
 </script>
