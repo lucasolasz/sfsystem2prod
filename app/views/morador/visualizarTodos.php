@@ -81,6 +81,9 @@
                     </a>
                     <a href="${urlSistema}Moradores/deletarMorador/${row.id_morador}" class="btn btn-danger">
                         <i class="bi bi-trash-fill"></i> Excluir
+                    </a>
+                    <a href="${urlSistema}GerarPdf/gerar/${row.id_morador}" class="btn btn-secondary" target="_blank">
+                        <i class="bi bi-printer"></i> Imprimir
                     </a>`;
                 }
             }

@@ -281,4 +281,13 @@ class MoradorModel
             return false;
         }
     }
+
+    public function recuperaMoradorPeloUsuarioLogado($id){
+
+        $this->db->query("SELECT * FROM tb_morador WHERE fk_usuario = :id_usuario ");
+        
+        $this->db->bind("id_usuario", $id);            
+        
+        return $this->db->resultados();
+    }
 }
