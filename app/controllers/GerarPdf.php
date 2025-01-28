@@ -40,7 +40,7 @@ class GerarPdf extends Controller
 
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(0, 7, 'Gerado Em: ' . date('d/m/Y H:i:s') , 0, 1, 'C');
-        $pdf->Cell(0, 7, 'Gerado Por: ' . $_SESSION['ds_nome_usuario'] , 0, 1, 'C');
+        $pdf->Cell(0, 7, 'Gerado Por: ' . $_SESSION['ds_nome_usuario'] . " ".  $_SESSION['ds_sobrenome_usuario'] , 0, 1, 'C');
 
         $morador = $this->modelMorador->retornarMoradorPorId($id);
         $moradorConvertido = $this->converterObjetoMorador($morador);
