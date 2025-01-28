@@ -16,6 +16,7 @@ function initDataTable(tableId, params) {
                         tabela: params.tabela,
                         colunas_pesquisa: params.colunas_pesquisa,
                         colunas_ordenacao: params.colunas_ordenacao,
+                        condicao: params.condicao,
                         start: d.start,
                         length: d.length,
                         search: d.search.value,

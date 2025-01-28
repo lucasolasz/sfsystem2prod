@@ -47,6 +47,7 @@
         tabela: 'tb_morador', //tabela que será utilizada para pesquisa
         colunas_pesquisa: ['nm_morador'], //coluna para a busca dentro da tabela. Input Search
         colunas_ordenacao: ['nm_morador'], //colunas utilizadas para ordenação
+        condicao: '',
         joins: [{
             tabela: 'tb_casa',
             condicao: 'tb_morador.fk_casa = tb_casa.id_casa'

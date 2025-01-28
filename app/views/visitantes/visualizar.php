@@ -47,6 +47,7 @@
         tabela: 'tb_visitante',
         colunas_pesquisa: ['nm_visitante', 'documento_visitante'],
         colunas_ordenacao: ['nm_visitante'],
+        condicao: '',
         joins: [],
         columns: [{
             "data": "nm_visitante",

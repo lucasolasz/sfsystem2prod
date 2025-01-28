@@ -47,6 +47,7 @@
         tabela: 'tb_usuario', //tabela que será utilizada para pesquisa
         colunas_pesquisa: ['ds_nome_usuario'], //coluna para a busca dentro da tabela. Input Search
         colunas_ordenacao: ['ds_nome_usuario'], //colunas utilizadas para ordenação
+        condicao: 'id_usuario != 0',
         joins: [
             {
                 tabela: 'tb_cargo',

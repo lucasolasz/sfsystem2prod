@@ -22,6 +22,7 @@ class DataTablesModel
         $direcaoOrdenacao = 'asc',
         $listaColunasPesquisa = null,
         $listaColunaOrdenacao = null,
+        $condicao = '',
         $joins = []
     ) {
 
@@ -36,9 +37,20 @@ class DataTablesModel
             }
         }
 
-        if (!empty($busca)) {
-            $consulta .= " WHERE 1=1";
-            $consulta .= $this->montarQueryBusca($listaColunasPesquisa);
+        $whereConditions = [];
+
+        if (!empty($busca) && !empty($listaColunasPesquisa)) {
+            // $consulta .= " WHERE 1=1";
+            $whereConditions[] = $this->montarQueryBusca($listaColunasPesquisa);
+        }
+
+        if (!empty($condicao)) {
+            $whereConditions[] = $condicao;
+        }
+
+        // Monta a cláusula WHERE, se houver condições
+        if (!empty($whereConditions)) {
+            $consulta .= " WHERE " . implode(" AND ", $whereConditions);
         }
 
         // Adicionar a cláusula ORDER BY
@@ -69,6 +81,7 @@ class DataTablesModel
         $tabela = null,
         $listaColunasPesquisa = null,
         $listaColunaOrdenacao = null,
+        $condicao = '',
         $joins = []
     ) {
 
@@ -83,9 +96,20 @@ class DataTablesModel
             }
         }
 
-        if (!empty($busca)) {
-            $consulta .= " WHERE 1=1 ";
-            $consulta .= $this->montarQueryBusca($listaColunasPesquisa);
+        $whereConditions = [];
+
+        if (!empty($busca) && !empty($listaColunasPesquisa)) {
+            // $consulta .= " WHERE 1=1 ";
+            $whereConditions[] = $this->montarQueryBusca($listaColunasPesquisa);
+        }
+
+        if (!empty($condicao)) {
+            $whereConditions[] = $condicao;
+        }
+
+        // Monta a cláusula WHERE, se houver condições
+        if (!empty($whereConditions)) {
+            $consulta .= " WHERE " . implode(" AND ", $whereConditions);
         }
 
         // $consulta .= " ORDER BY $colunaOrdenada $direcaoOrdenacao LIMIT :inicio, :quantidade";
@@ -116,7 +140,7 @@ class DataTablesModel
 
     private function montarQueryBusca($listaColunas)
     {
-        $stringSaida = " AND (";
+        $stringSaida = " (";
         $condicoes = [];
         foreach ($listaColunas as $coluna) {
             $condicoes[] = "$coluna LIKE :busca";

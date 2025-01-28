@@ -23,6 +23,7 @@ class ListarDataTable extends Controller
         $tabela = $data['tabela'];
         $listaColunasPesquisa = $data['colunas_pesquisa'];
         $listaColunaOrdenacao = $data['colunas_ordenacao'];
+        $condicao = $data['condicao'];
 
         $joins = isset($data['joins']) ? $data['joins'] : [];
 
@@ -39,6 +40,7 @@ class ListarDataTable extends Controller
             $tabela,
             $listaColunasPesquisa,
             $listaColunaOrdenacao,
+            $condicao,
             $joins
         );
 
@@ -49,6 +51,7 @@ class ListarDataTable extends Controller
             $direcaoOrdenacao,
             $listaColunasPesquisa,
             $listaColunaOrdenacao,
+            $condicao,
             $joins
         );
 
