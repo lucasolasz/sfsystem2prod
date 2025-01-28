@@ -38,7 +38,7 @@ class Moradores extends Controller
     {
         $listaTiposVeiculos = $this->modelVeiculo->recuperarTiposVeiculos();
         $listaCoresVeiculos = $this->modelVeiculo->recuperarCoresVeiculos();
-        $casas = $this->casaModel->reuperarTodasCasas();
+        $casas = $this->casaModel->recuperarTodasCasasNaoCadastradasMoradores();
 
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         if (isset($formulario)) {
