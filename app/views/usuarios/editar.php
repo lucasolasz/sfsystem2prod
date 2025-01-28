@@ -80,8 +80,14 @@
                     <div class="invalid-feedback"><?= $dados['tipoCargo_erro'] ?></div>
                 </div>
 
+                <div class="mb-3 mt-4">
+                    <label for="txtCasaCadastrada" class="form-label">Casa Cadastrada: </label>
+                    <input type="text" class="form-control <?= $dados['sobrenome_erro'] ? 'is-invalid' : '' ?>"
+                            id="txtCasaCadastrada" value="<?= $dados['usuario']->ds_numero_casa ?>" disabled>
+                </div>
+
                 <div class="mb-3">
-                    <label for="cboCasa" class="form-label">N° Casa: *</label>
+                    <label for="cboCasa" class="form-label">Alterar N° Casa: *</label>
                     <select class="form-select <?= $dados['cboCasa_erro'] ? 'is-invalid' : '' ?>" name="cboCasa" id="cboCasa">
                         <option label="Selecione uma casa"></option>
                         <?php foreach ($dados['casas'] as $casa) {

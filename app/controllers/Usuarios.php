@@ -166,7 +166,7 @@ class Usuarios extends Controller
 
         $tiposUsuario = $this->model->listarTipoUsuario();
         $cargoUsuario = $this->model->listarCargoUsuario();
-        $usuario = $this->model->lerUsuarioPorId($id);
+        $usuario = $this->model->lerUsuarioPorIdComCasas($id);
         $casas = $this->casaModel->reuperarTodasCasasNaoCadastradas();
 
         //Evita que codigos maliciosos sejam enviados pelos campos
