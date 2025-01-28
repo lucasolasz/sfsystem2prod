@@ -72,6 +72,7 @@ class Login extends Controller
     {
         $_SESSION['id_usuario'] = $usuario->id_usuario;
         $_SESSION['ds_nome_usuario'] = $usuario->ds_nome_usuario;
+        $_SESSION['ds_sobrenome_usuario'] = $usuario->ds_sobrenome_usuario;
         $_SESSION['ds_email_usuario'] = $usuario->ds_email_usuario;
         $_SESSION['fk_cargo'] = $usuario->fk_cargo;
         $_SESSION['fk_tipo_usuario'] = $usuario->fk_tipo_usuario;

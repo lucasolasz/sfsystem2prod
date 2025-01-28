@@ -109,7 +109,7 @@
                         <div class="d-flex align-items-center">
                             <?php if (isset($_SESSION['id_usuario'])) { ?>
                                 <div class="me-2" style="width: 300px;">
-                                    <p class="mb-0">Olá, <?= ucfirst($_SESSION['ds_nome_usuario']); ?>, Seja bem vindo(a)
+                                    <p class="mb-0">Olá, <?= ucfirst($_SESSION['ds_nome_usuario']) . " " . $_SESSION['ds_sobrenome_usuario']; ?>, <br> Seja bem vindo(a)
                                     </p>
                                 </div>
                                 <div>
