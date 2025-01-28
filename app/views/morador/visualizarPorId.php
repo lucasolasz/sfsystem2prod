@@ -42,7 +42,7 @@
                         <?php if (empty($dados['morador'])) { ?>
 
                             <tr>
-                                <td colspan="5" class="align-middle">Nenhum cadastro encontrado</td>
+                                <td colspan="7" class="align-middle">Nenhum cadastro encontrado</td>
                             </tr>
 
                         <?php } ?>
@@ -60,7 +60,7 @@
                                     <a href="<?= URL . 'Moradores/editarMoradorPorIdMorador/' . $morador->id_morador ?>"
                                         class="btn btn-warning"><i class="bi bi-pencil-square"></i> Editar</a>
 
-                                    <a href="<?= URL . 'Moradores/deletarMorador/' . $morador->id_morador ?>"
+                                    <a href="<?= URL . 'Moradores/deletarMoradorPorIdUsuario/' . $morador->id_morador ?>"
                                         class="btn btn-danger"><i class="bi bi-trash-fill"></i> Exlcuir</a>
                                     <a href="<?= URL . 'GerarPdf/gerarPdfMorador/' . $morador->id_morador ?>" class="btn btn-secondary" target="_blank">
                                         <i class="bi bi-printer"></i> Imprimir

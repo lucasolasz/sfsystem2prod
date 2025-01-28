@@ -62,6 +62,30 @@
         }
     }
 
+    function esconderCampoPets() {
+
+        const petsIsChecked = document.getElementById("chkPossuiPets").checked;
+
+        const campoPets = document.querySelectorAll("#qtdPets");
+
+        campoPets.forEach(campo => {
+            campo.disabled = !petsIsChecked;
+        });
+
+        }
+
+        function esconderCampoAdesivo() {
+
+        const adesivoIsChecked = document.getElementById("chkRecebeuAdesivo").checked;
+
+        const camposAdesivo = document.querySelectorAll("#qtdAdesivos");
+
+        camposAdesivo.forEach(campo => {
+            campo.disabled = !adesivoIsChecked;
+        });
+
+    }
+
     $(document).ready(function() {
         // Carregar veículos existentes ao carregar a página
         carregarVeiculosExistentes();
@@ -92,6 +116,38 @@
                 $('#divLocatario').slideUp(); // Esconde a div com animação
             }
         });
+
+        if ($('#chkPossuiPets').is(':checked')) {
+            $('#divQuantidadePets').show(); // Exibe a div se o checkbox estiver marcado
+        } else {
+            $('#divQuantidadePets').hide();
+        }
+
+        // Evento para exibir/ocultar a div ao clicar no checkbox
+        $('#chkPossuiPets').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#divQuantidadePets').slideDown(); // Exibe a div com animação
+            } else {
+                $('#divQuantidadePets').slideUp(); // Esconde a div com animação
+            }
+        });
+
+        if ($('#chkRecebeuAdesivo').is(':checked')) {
+            $('#divQuantidadeAdesivos').show(); // Exibe a div se o checkbox estiver marcado
+        } else {
+            $('#divQuantidadeAdesivos').hide();
+        }
+
+        // Evento para exibir/ocultar a div ao clicar no checkbox
+        $('#chkRecebeuAdesivo').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#divQuantidadeAdesivos').slideDown(); // Exibe a div com animação
+            } else {
+                $('#divQuantidadeAdesivos').slideUp(); // Esconde a div com animação
+            }
+        });
+
+
     });
 </script>
 
@@ -254,11 +310,19 @@
                             <div class="form-check">
                                 <?php
                                 $checkedPet = '';
-                                if ($dados['morador']->flag_tem_pet == 'S') {
-                                    $checkedPet = 'checked';
+
+                                if (!empty($dados['chkPossuiPets'])) {
+                                    if ($dados['chkPossuiPets'] == 'S') {
+                                        $checkedPet = 'checked';
+                                    }
+                                } else {
+                                    if ($dados['morador']->flag_tem_pet == 'S') {
+                                        $checkedPet = 'checked';
+                                    }
                                 }
+
                                 ?>
-                                <input class="form-check-input" type="checkbox" value="S" id="chkPossuiPets" <?= $checkedPet ?> name="chkPossuiPets">
+                                <input class="form-check-input" type="checkbox" value="S" id="chkPossuiPets" <?= $checkedPet ?> name="chkPossuiPets" onclick="esconderCampoPets()">
                                 <label class="form-check-label" for="chkPossuiPets">
                                     Possui pet?
                                 </label>
@@ -266,10 +330,13 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col-sm-4">
-                            <label for="qtdPets" class="form-label">Quantidade de pets: </label>
-                            <input type="text" class="form-control" name="qtdPets" id="qtdPets" maxlength="1" placeholder="Somente números" value="<?= trim($dados['morador']->qtd_pets) ?>">
+                    <div id="divQuantidadePets">
+                        <div class="row">
+                            <div class="mb-3 col-sm-4">
+                                <label for="qtdPets" class="form-label">Quantidade de pets: </label>
+                                <input type="text" class="form-control" name="qtdPets" id="qtdPets" maxlength="1" placeholder="Somente números" value="<?= trim($dados['morador']->qtd_pets) ?>">
+                                <div class="text-danger"><?= $dados['quantidade_pets_erro'] ?></div>
+                            </div>
                         </div>
                     </div>
 
@@ -282,11 +349,19 @@
                             <div class="form-check">
                                 <?php
                                 $checkedAdesivo = '';
-                                if ($dados['morador']->flag_adesivo == 'S') {
-                                    $checkedAdesivo = 'checked';
+
+                                if (!empty($dados['chkRecebeuAdesivo'])) {
+                                    if ($dados['chkRecebeuAdesivo'] == 'S') {
+                                        $checkedAdesivo = 'checked';
+                                    }
+                                } else {
+                                    if ($dados['morador']->flag_adesivo == 'S') {
+                                        $checkedAdesivo = 'checked';
+                                    }
                                 }
+
                                 ?>
-                                <input class="form-check-input" type="checkbox" value="S" id="chkRecebeuAdesivo" <?= $checkedAdesivo ?> name="chkRecebeuAdesivo">
+                                <input class="form-check-input" type="checkbox" value="S" id="chkRecebeuAdesivo" <?= $checkedAdesivo ?> name="chkRecebeuAdesivo" onclick="esconderCampoAdesivo()">
                                 <label class="form-check-label" for="chkRecebeuAdesivo">
                                     Recebeu Adesivo?
                                 </label>
@@ -294,10 +369,13 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col-sm-4">
-                            <label for="qtdAdesivos" class="form-label">Quantidade de adesivos: </label>
-                            <input type="text" class="form-control" name="qtdAdesivos" id="qtdAdesivos" maxlength="1" placeholder="Somente números" value="<?= trim($dados['morador']->qtd_adesivos) ?>">
+                    <div id="divQuantidadeAdesivos">
+                        <div class="row">
+                            <div class="mb-3 col-sm-4">
+                                <label for="qtdAdesivos" class="form-label">Quantidade de adesivos: </label>
+                                <input type="text" class="form-control" name="qtdAdesivos" id="qtdAdesivos" maxlength="1" placeholder="Somente números" value="<?= trim($dados['morador']->qtd_adesivos) ?>">
+                                <div class="text-danger"><?= $dados['quantidade_adesivos_erro'] ?></div>
+                            </div>
                         </div>
                     </div>
 

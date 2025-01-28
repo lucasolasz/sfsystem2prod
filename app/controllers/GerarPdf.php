@@ -5,6 +5,8 @@ require_once APP . '/libraries/fpdf.php';
 class GerarPdf extends Controller
 {
     private $modelMorador;
+    private $usuarioModel;
+
     //Construtor do model do Usuário que fará o acesso ao banco
     public function __construct()
     {   
@@ -12,6 +14,7 @@ class GerarPdf extends Controller
         $this->verificaSeEstaLogadoETemPermissao($permissoes);
 
         $this->modelMorador = $this->model("MoradorModel");
+        $this->usuarioModel = $this->model("UsuarioModel");
     }
 
     public function gerarPdfMorador($id){
@@ -23,7 +26,6 @@ class GerarPdf extends Controller
         }
 
     }
-
 
     public function gerar($id)
     {
@@ -110,16 +112,17 @@ class GerarPdf extends Controller
 
     private function podeGerarPdf($id)
     {
-        $moradorBanco = $this->modelMorador->recuperaMoradorPeloUsuarioLogado($_SESSION['id_usuario']);
+        
+        $morador = $this->modelMorador->retornarMoradorPorId($id);
 
-        if(!empty($moradorBanco)){
-            if(count($moradorBanco) == 1 && $moradorBanco[0]->id_morador == $id){
-                return true;
-            }
-            return false;
+        $usuario = $this->usuarioModel->lerUsuarioPorIdComCasas($_SESSION['id_usuario']);
+
+        if(empty($usuario) || empty($morador) || $morador->fk_casa != $usuario->fk_casa){
+           return false;
+        } else {
+            return true;
         }
 
-        return false;
     }
 
 }

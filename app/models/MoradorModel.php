@@ -185,16 +185,17 @@ class MoradorModel
         }
     }
 
-    public function retornarMoradorCadastradoPorIdUsuario($id)
+    public function retornarMoradorCadastradoPorIdUsuarioOuFkCasa($id, $fk_casa)
     {
 
         $queryMontada = " SELECT * FROM tb_morador m ";
         $queryMontada .= " LEFT JOIN tb_casa tc ON tc.id_casa = m.fk_casa";
-        $queryMontada .= " WHERE fk_usuario = :fk_usuario ";
+        $queryMontada .= " WHERE fk_usuario = :fk_usuario OR fk_casa = :fk_casa";
 
         $this->db->query($queryMontada);
 
         $this->db->bind("fk_usuario", $id);
+        $this->db->bind("fk_casa", $fk_casa);
 
         return $this->db->resultados();
     }

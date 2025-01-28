@@ -55,15 +55,39 @@
 
     function esconderCampo() {
         // Obtém o estado do checkbox
-        const isChecked = document.getElementById("chkLocatario").checked;
+        const locatarioIsChecked = document.getElementById("chkLocatario").checked;
 
         // Seleciona todos os campos do locatário
         const camposLocatario = document.querySelectorAll("#txtNomeLocatario, #txtDocumentoLocatario, #dateNascimentoLocatario, #txtEmailLocatario, #txtTelefoneUmLocatario, #txtTelefoneDoisLocatario");
 
         // Habilita ou desabilita os campos com base no estado do checkbox
         camposLocatario.forEach(campo => {
-            campo.disabled = !isChecked;
+            campo.disabled = !locatarioIsChecked;
         });
+    }
+
+    function esconderCampoPets() {
+
+        const petsIsChecked = document.getElementById("chkPossuiPets").checked;
+
+        const campoPets = document.querySelectorAll("#qtdPets");
+
+        campoPets.forEach(campo => {
+            campo.disabled = !petsIsChecked;
+        });
+
+    }
+
+    function esconderCampoAdesivo() {
+
+        const adesivoIsChecked = document.getElementById("chkRecebeuAdesivo").checked;
+
+        const camposAdesivo = document.querySelectorAll("#qtdAdesivos");
+
+        camposAdesivo.forEach(campo => {
+            campo.disabled = !adesivoIsChecked;
+        });
+
     }
 
     $(document).ready(function() {
@@ -82,6 +106,38 @@
                 $('#divLocatario').slideUp(); // Esconde a div com animação
             }
         });
+
+        if ($('#chkPossuiPets').is(':checked')) {
+            $('#divQuantidadePets').show(); // Exibe a div se o checkbox estiver marcado
+        } else {
+            $('#divQuantidadePets').hide();
+        }
+
+        // Evento para exibir/ocultar a div ao clicar no checkbox
+        $('#chkPossuiPets').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#divQuantidadePets').slideDown(); // Exibe a div com animação
+            } else {
+                $('#divQuantidadePets').slideUp(); // Esconde a div com animação
+            }
+        });
+
+        if ($('#chkRecebeuAdesivo').is(':checked')) {
+            $('#divQuantidadeAdesivos').show(); // Exibe a div se o checkbox estiver marcado
+        } else {
+            $('#divQuantidadeAdesivos').hide();
+        }
+
+        // Evento para exibir/ocultar a div ao clicar no checkbox
+        $('#chkRecebeuAdesivo').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#divQuantidadeAdesivos').slideDown(); // Exibe a div com animação
+            } else {
+                $('#divQuantidadeAdesivos').slideUp(); // Esconde a div com animação
+            }
+        });
+
+
     });
 </script>
 
@@ -237,7 +293,17 @@
                     <div class="row">
                         <div class="mb-3 col-sm-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="S" id="chkPossuiPets" name="chkPossuiPets">
+                                <?php
+                                $checkedPet = '';
+
+                                if (!empty($dados['chkPossuiPets'])) {
+                                    if ($dados['chkPossuiPets'] == 'S') {
+                                        $checkedPet = 'checked';
+                                    }
+                                }
+
+                                ?>
+                                <input  <?= $checkedPet ?> class="form-check-input" type="checkbox" value="S" id="chkPossuiPets" name="chkPossuiPets" onclick="esconderCampoPets()">
                                 <label class="form-check-label" for="chkPossuiPets">
                                     Possui pet?
                                 </label>
@@ -245,13 +311,15 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col-sm-4">
-                            <label for="qtdPets" class="form-label">Quantidade de pets: </label>
-                            <input type="text" class="form-control" name="qtdPets" id="qtdPets" maxlength="1" placeholder="Somente números">
+                    <div id="divQuantidadePets">
+                        <div class="row">
+                            <div class="mb-3 col-sm-4">
+                                <label for="qtdPets" class="form-label">Quantidade de pets: </label>
+                                <input type="text" class="form-control" name="qtdPets" id="qtdPets" maxlength="1" placeholder="Somente números" value="<?= $dados['qtdPets'] ?>">
+                                <div class="text-danger"><?= $dados['quantidade_pets_erro'] ?></div>
+                            </div>
                         </div>
                     </div>
-
 
                     <hr>
                     <h3>Veículo(s) da residência</h3>
@@ -259,7 +327,17 @@
                     <div class="row">
                         <div class="mb-3 col-sm-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="S" id="chkRecebeuAdesivo" name="chkRecebeuAdesivo">
+                                <?php
+                                $checkedAdesivo = '';
+
+                                if (!empty($dados['chkRecebeuAdesivo'])) {
+                                    if ($dados['chkRecebeuAdesivo'] == 'S') {
+                                        $checkedAdesivo = 'checked';
+                                    }
+                                }
+                                ?>
+                                
+                                <input <?= $checkedAdesivo ?> class="form-check-input" type="checkbox" value="S" id="chkRecebeuAdesivo" name="chkRecebeuAdesivo" onclick="esconderCampoAdesivo()">
                                 <label class="form-check-label" for="chkRecebeuAdesivo">
                                     Recebeu Adesivo?
                                 </label>
@@ -267,10 +345,13 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="mb-3 col-sm-4">
-                            <label for="qtdAdesivos" class="form-label">Quantidade de adesivos: </label>
-                            <input type="text" class="form-control" name="qtdAdesivos" id="qtdAdesivos" maxlength="1" placeholder="Somente números">
+                    <div id="divQuantidadeAdesivos">
+                        <div class="row">
+                            <div class="mb-3 col-sm-4">
+                                <label for="qtdAdesivos" class="form-label">Quantidade de adesivos: </label>
+                                <input type="text" class="form-control" name="qtdAdesivos" id="qtdAdesivos" maxlength="1" placeholder="Somente números" value="<?= $dados['qtdAdesivos'] ?>">
+                                <div class="text-danger"><?= $dados['quantidade_adesivos_erro'] ?></div>
+                            </div>
                         </div>
                     </div>
 

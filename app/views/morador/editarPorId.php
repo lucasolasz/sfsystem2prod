@@ -158,7 +158,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a
-                        href="<?= URL . 'Moradores/visualizarMoradorPorIdUsuario/' . $dados['morador']->fk_usuario ?>">Moradores</a>
+                        href="<?= URL . 'Moradores/visualizarMoradorPorIdUsuario/' . $_SESSION['id_usuario'] ?>">Moradores</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Casa número:
                     <?= ucfirst($dados['morador']->ds_numero_casa) ?>
@@ -441,7 +441,7 @@
                         </div>
                         <div class="p-2">
                             <a class="btn btn-secondary"
-                                href="<?= URL . 'Moradores/visualizarMoradorPorIdUsuario/' . $dados['morador']->fk_usuario ?>"
+                                href="<?= URL . 'Moradores/visualizarMoradorPorIdUsuario/' . $_SESSION['id_usuario'] ?>"
                                 role="button">Cancelar</a>
                         </div>
                     </div>

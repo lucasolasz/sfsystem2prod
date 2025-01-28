@@ -64,10 +64,10 @@ class Moradores extends Controller
                 'txtTelefoneUmLocatario' => trim($formulario['txtTelefoneUmLocatario']),
                 'txtTelefoneDoisLocatario' => trim($formulario['txtTelefoneDoisLocatario']),
 
-                'qtdPets' => trim($formulario['qtdPets']) != "" ? intval($formulario['qtdPets']) : 0,
+                'qtdPets' => isset($formulario['qtdPets']) != "" ? intval($formulario['qtdPets']) : 0,
                 'chkPossuiPets' => isset($formulario['chkPossuiPets']) ? trim($formulario['chkPossuiPets']) : "N",
 
-                'qtdAdesivos' => trim($formulario['qtdAdesivos']) != "" ? intval($formulario['qtdAdesivos']) : 0,
+                'qtdAdesivos' => isset($formulario['qtdAdesivos']) != "" ? intval($formulario['qtdAdesivos']) : 0,
                 'chkRecebeuAdesivo' => isset($formulario['chkRecebeuAdesivo']) ? trim($formulario['chkRecebeuAdesivo']) : "N",
 
 
@@ -82,10 +82,22 @@ class Moradores extends Controller
                 'dataNascimentoLocatario_erro' => '',
                 'emailLocatario_erro' => '',
                 'telefone_um_locatario_erro' => '',
+                'quantidade_pets_erro' => '',
+                'quantidade_adesivos_erro' => '',
+
+
                 'casas' => $casas,
                 'listaTiposVeiculos' => $listaTiposVeiculos,
                 'listaCoresVeiculos' => $listaCoresVeiculos
             ];
+
+            if ($dados['chkRecebeuAdesivo'] == 'N') {
+                $dados['qtdAdesivos'] = 0;
+            }
+
+            if ($dados['chkPossuiPets'] == 'N') {
+                $dados['qtdPets'] = 0;
+            }
 
             if (empty($formulario['txtNomeProprietario'])) {
                 $dados['nomeProprietario_erro'] = "Preencha o Nome";
@@ -99,6 +111,10 @@ class Moradores extends Controller
                 $dados["telefone_um_proprietario_erro"] = "Preencha um telefone";
             } elseif (empty($formulario['cboCasa'])) {
                 $dados["cboCasa_erro"] = "Escolha uma casa";
+            } elseif (($dados['chkPossuiPets'] == 'S' && $dados['qtdPets'] == 0)) {
+                $dados["quantidade_pets_erro"] = "Digite a quantidade de pets valida *";
+            } elseif (($dados['chkRecebeuAdesivo'] == 'S' && $dados['qtdAdesivos'] == 0)) {
+                $dados["quantidade_adesivos_erro"] = "Digite a quantidade de adesivos valida *";
             } else {
 
                 $idRetorno = $this->executarQuerysCadastroMorador($listaVeiculosCadastradosForm, $dados);
@@ -145,6 +161,8 @@ class Moradores extends Controller
                 'emailProprietario_erro' => '',
                 'telefone_um_proprietario_erro' => '',
                 'cboCasa_erro' => '',
+                'quantidade_pets_erro' => '',
+                'quantidade_adesivos_erro' => '',
 
                 'nomeLocatario_erro' => '',
                 'documentoLocatario_erro' => '',
@@ -233,10 +251,10 @@ class Moradores extends Controller
                 'txtTelefoneUmLocatario' => trim($formulario['txtTelefoneUmLocatario']),
                 'txtTelefoneDoisLocatario' => trim($formulario['txtTelefoneDoisLocatario']),
 
-                'qtdPets' => trim($formulario['qtdPets']) != "" ? intval($formulario['qtdPets']) : 0,
+                'qtdPets' => isset($formulario['qtdPets']) != "" ? intval($formulario['qtdPets']) : 0,
                 'chkPossuiPets' => isset($formulario['chkPossuiPets']) ? trim($formulario['chkPossuiPets']) : "N",
 
-                'qtdAdesivos' => trim($formulario['qtdAdesivos']) != "" ? intval($formulario['qtdAdesivos']) : 0,
+                'qtdAdesivos' => isset($formulario['qtdAdesivos']) != "" ? intval($formulario['qtdAdesivos']) : 0,
                 'chkRecebeuAdesivo' => isset($formulario['chkRecebeuAdesivo']) ? trim($formulario['chkRecebeuAdesivo']) : "N",
 
 
@@ -251,6 +269,10 @@ class Moradores extends Controller
                 'dataNascimentoLocatario_erro' => '',
                 'emailLocatario_erro' => '',
                 'telefone_um_locatario_erro' => '',
+                'quantidade_pets_erro' => '',
+                'quantidade_adesivos_erro' => '',
+
+
                 'casas' => $casas,
                 'listaTiposVeiculos' => $listaTiposVeiculos,
                 'listaCoresVeiculos' => $listaCoresVeiculos,
@@ -273,7 +295,11 @@ class Moradores extends Controller
                 $dados["telefone_um_proprietario_erro"] = "Preencha um telefone";
             } elseif (empty($formulario['cboCasa'])) {
                 $dados["cboCasa_erro"] = "Escolha uma casa";
-            } else {
+            } elseif (($dados['chkPossuiPets'] == 'S' && $dados['qtdPets'] == 0)) {
+                $dados["quantidade_pets_erro"] = "Digite a quantidade de pets valida *";
+            } elseif (($dados['chkRecebeuAdesivo'] == 'S' && $dados['qtdAdesivos'] == 0)) {
+                $dados["quantidade_adesivos_erro"] = "Digite a quantidade de adesivos valida *";
+            }else {
 
                 $dadosAtualizado = $this->verificarSeNaoTemLocatario($dados);
 
@@ -317,6 +343,8 @@ class Moradores extends Controller
                 'emailProprietario_erro' => '',
                 'telefone_um_proprietario_erro' => '',
                 'cboCasa_erro' => '',
+                'quantidade_pets_erro' => '',
+                'quantidade_adesivos_erro' => '',
 
                 'nomeLocatario_erro' => '',
                 'documentoLocatario_erro' => '',
@@ -363,13 +391,30 @@ class Moradores extends Controller
 
         //Para exibir mensagem success , não precisa informar o tipo de classe
         Alertas::mensagem('morador', 'Morador deletado com sucesso');
+        Redirecionamento::redirecionar('Moradores/visualizarMoradores/');
+    }
+
+    public function deletarMoradorPorIdUsuario($id)
+    {
+        $this->modelVeiculo->executarQueryDeleteVeiculosPorIdMorador($id);
+        $this->model->deletarMorador($id);
+
+        //Para exibir mensagem success , não precisa informar o tipo de classe
+        Alertas::mensagem('morador', 'Morador deletado com sucesso');
         Redirecionamento::redirecionar('Moradores/visualizarMoradorPorIdUsuario/' . $_SESSION['id_usuario']);
     }
 
     public function visualizarMoradorPorIdUsuario($idUsuario)
     {
+        $usuario = $this->usuarioModel->lerUsuarioPorIdComCasas($idUsuario);
 
-        $morador = $this->model->retornarMoradorCadastradoPorIdUsuario($idUsuario);
+        if(empty($usuario)){
+            Redirecionamento::redirecionar('Moradores/visualizarMoradorPorIdUsuario/' . $_SESSION['id_usuario']);
+        }
+
+        $fk_casa = $usuario->fk_casa;
+
+        $morador = $this->model->retornarMoradorCadastradoPorIdUsuarioOuFkCasa($idUsuario, $fk_casa);
 
         $novoDisabled = !empty($morador) ? "disabled" : "";
 
@@ -421,7 +466,7 @@ class Moradores extends Controller
                 'txtTelefoneUmLocatario' => trim($formulario['txtTelefoneUmLocatario']),
                 'txtTelefoneDoisLocatario' => trim($formulario['txtTelefoneDoisLocatario']),
 
-                'qtdPets' => trim($formulario['qtdPets']) != "" ? intval($formulario['qtdPets']) : 0,
+                'qtdPets' => isset($formulario['qtdPets']) != "" ? intval($formulario['qtdPets']) : 0,
                 'chkPossuiPets' => isset($formulario['chkPossuiPets']) ? trim($formulario['chkPossuiPets']) : "N",
 
                 'qtdAdesivos' => isset($formulario['qtdAdesivos']) != "" ? intval($formulario['qtdAdesivos']) : 0,
@@ -546,7 +591,9 @@ class Moradores extends Controller
     {
         $morador = $this->model->retornarMoradorPorId($id);
 
-        if ($morador === false || ($morador->fk_usuario != $_SESSION['id_usuario'])) {
+        $usuario = $this->usuarioModel->lerUsuarioPorIdComCasas($_SESSION['id_usuario']);
+
+        if(empty($usuario) || empty($morador) || $morador->fk_casa != $usuario->fk_casa){
             Redirecionamento::redirecionar('Moradores/visualizarMoradorPorIdUsuario/' . $_SESSION['id_usuario']);
         }
 
@@ -657,7 +704,7 @@ class Moradores extends Controller
                 }
 
                 Alertas::mensagem('morador', 'Morador atualizado com sucesso');
-                Redirecionamento::redirecionar('Moradores/visualizarMoradorPorIdUsuario/' . $morador->fk_usuario);
+                Redirecionamento::redirecionar('Moradores/visualizarMoradorPorIdUsuario/' . $_SESSION['id_usuario']);
             }
         } else {
 
