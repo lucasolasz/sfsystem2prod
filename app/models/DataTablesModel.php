@@ -78,7 +78,7 @@ class DataTablesModel
             foreach ($joins as $join) {
                 // Verifica se cada item de join contém 'tabela' e 'condicao' para garantir que o JOIN seja válido
                 if (isset($join['tabela']) && isset($join['condicao'])) {
-                    $consulta .= " JOIN " . $join['tabela'] . " ON " . $join['condicao'];
+                    $consulta .= " LEFT JOIN " . $join['tabela'] . " ON " . $join['condicao'];
                 }
             }
         }
