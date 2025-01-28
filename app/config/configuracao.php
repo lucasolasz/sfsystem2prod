@@ -24,7 +24,8 @@ define('ADMINISTRADOR', 'ADM');
 //dirname() retorna o nome do diretorio em que o arquivo está
 define('APP', dirname(dirname(__FILE__)));
 
-define('URL', '/');
+define('URL', '/sfsystem2/');
+// define('URL', '/');
 
 define('APP_NOME', 'SF SYSTEM 2');
 
